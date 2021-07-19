@@ -57,7 +57,7 @@ CodeMirror.defineMode('tiki', function(config) {
       while ((c = stream.eat(/[^\s\u00a0=\"\'\/?(}]/))) tagName += c;
       state.tokenize = inPlugin;
       return "tag";
-      break;
+      
     case "_": //bold
       if (stream.eat("_")) {
         return chain(inBlock("strong", "__", inText));
@@ -76,7 +76,7 @@ CodeMirror.defineMode('tiki', function(config) {
       break;
     case "[":// Weblink
       return chain(inBlock("variable-3", "]", inText));
-      break;
+      
     case "|": //table
       if (stream.eat("|")) {
         return chain(inBlock("comment", "||"));
@@ -101,7 +101,7 @@ CodeMirror.defineMode('tiki', function(config) {
       break;
     case "^": //box
       return chain(inBlock("tw-box", "^"));
-      break;
+      
     case "~": //np
       if (stream.match("np~")) {
         return chain(inBlock("meta", "~/np~"));
@@ -124,12 +124,12 @@ CodeMirror.defineMode('tiki', function(config) {
         } else {
           return chain(inLine("header string"));
         }
-        break;
+        
       case "*": //unordered list line item, or <li /> at start of line
       case "#": //ordered list line item, or <li /> at start of line
       case "+": //ordered list line item, or <li /> at start of line
         return chain(inLine("tw-listitem bracket"));
-        break;
+        
       }
     }
 
